@@ -11,7 +11,7 @@ RUN pip uninstall -y torchvision torchaudio 2>/dev/null || true
 
 # Install vLLM + Python deps (torch 2.8.0 + CUDA 12.8.1 in base image)
 COPY requirements.txt /requirements.txt
-RUN pip install --no-cache-dir -r /requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /requirements.txt
 
 # ===============================
 # DOWNLOAD qwen3-4b-cuad-entities-v2
