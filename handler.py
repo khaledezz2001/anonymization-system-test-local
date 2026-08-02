@@ -558,7 +558,7 @@ def anonymize_document(pages, system_prompt=None, user_prompt=None):
           f"{len(all_bank_accounts)} bank_accounts, {len(all_emails)} emails, "
           f"{len(all_passports)} passports, {len(custom_entities)} custom_entities", flush=True)
 
-    # ---- REGEX BACKUP: catch patterns the LLM might have missed ----
+    # ---- REGE fX BACKUP: catch patterns the LLM might have missed ----
     backup_emails, backup_phones, backup_ibans = regex_backup_detection(
         full_text, existing_reg_ids=all_reg_ids
     )
