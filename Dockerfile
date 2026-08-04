@@ -9,10 +9,7 @@ ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
 # Remove pre-installed torchvision/torchaudio — not needed for text-only LLM inference
 RUN pip uninstall -y torchvision torchaudio 2>/dev/null || true
 
-# Upgrade PyTorch to 2.7 (vLLM 0.15+ needs PyTorch 2.7+, base image has 2.4)
-RUN pip install --no-cache-dir torch==2.7.0 --index-url https://download.pytorch.org/whl/cu124
-
-# Install vLLM + Python deps
+# Install vLLM + Python deps (PyTorch 2.4 + CUDA 12.4 from base image)
 COPY requirements.txt /requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /requirements.txt
 
