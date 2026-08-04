@@ -6,7 +6,7 @@ ENV HF_HOME=/models
 ENV HF_HUB_ENABLE_HF_TRANSFER=0
 ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
 
-# Remove pre-installed torchvision/torchaudio — not needed for text-only LLM inference
+# Remove pr e-installed torchvision/torchaudio — not needed for text-only LLM inference
 RUN pip uninstall -y torchvision torchaudio 2>/dev/null || true
 
 # Upgrade PyTorch to 2.7 (vLLM 0.15+ needs PyTorch 2.7+, base image has 2.4)
