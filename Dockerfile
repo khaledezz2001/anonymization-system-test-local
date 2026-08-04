@@ -9,12 +9,15 @@ ENV PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
 # Remove pre-installed torchvision/torchaudio — not needed for text-only LLM inference
 RUN pip uninstall -y torchvision torchaudio 2>/dev/null || true
 
-# Install vLLM + Python deps (PyTorch 2.4 + CUDA 12.4 from base image)
+# Upgrade PyTorch to 2.6 with CUDA 12.4 wheels (vLLM 0.8.5 needs PyTorch 2.6+)
+RUN pip install --no-cache-dir torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+
+# Install vLLM + Python deps
 COPY requirements.txt /requirements.txt
-RUN pip install --no-cache-dir --upgrade -r /requirements.txt
+RUN pip install --no-cache-dir -r /requirements.txt
 
 # Force upgrade transformers for Qwen3 tokenizer support
-# (vLLM 0.6.x pins an older version that crashes on Qwen3's extra_special_tokens)
+# (vLLM 0.8.x pins an older version that crashes on Qwen3's extra_special_tokens)
 RUN pip install --no-cache-dir --force-reinstall "transformers>=4.53.0"
 
 # ===============================
